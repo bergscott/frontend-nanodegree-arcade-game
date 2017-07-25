@@ -3,6 +3,11 @@ var tileSizeY = 83;
 
 var score = 0;
 
+var updateScore = function(newScore) {
+    score = newScore;
+    document.getElementById("score").innerHTML = "Score: " + newScore;
+};
+
 var Drawable = function() {};
 
 Drawable.prototype.render = function() {
@@ -91,7 +96,7 @@ Player.prototype.update = function(dX, dY) {
     var newY = this.y + dY;
     if (newY < 0) {
         player = new Player();
-        score += 10;
+        updateScore(score + 10);
     }
     if (newY > 0 && newY < 5*tileSizeY) {
         this.y = newY;
