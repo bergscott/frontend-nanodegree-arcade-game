@@ -1,9 +1,16 @@
 var tileSizeX = 101;
 var tileSizeY = 83;
 
+var score = 0;
+
 var Drawable = function() {};
+
 Drawable.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Drawable.prototype.getRow = function() {
+    return Math.ceil(this.y / tileSizeY);
 };
 
 // Enemies our player must avoid
@@ -82,7 +89,10 @@ Player.prototype.update = function(dX, dY) {
     }
 
     var newY = this.y + dY;
-    if (newY < 0) {player = new Player();}
+    if (newY < 0) {
+        player = new Player();
+        score += 10;
+    }
     if (newY > 0 && newY < 5*tileSizeY) {
         this.y = newY;
     }
